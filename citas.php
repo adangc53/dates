@@ -7,6 +7,6 @@
     <title>citas</title>
 </head>
 <body>
-    
+<?php include("Navbar.php") ?>
 </body>
 </html>

@@ -64,4 +64,15 @@ function CitasDisponibles(){
     $sql ="SELECT * FROM citas WHERE ocupados<lugares";
     return $Cn->execute($sql);
 }
+function InsertDetalle($asociado,$cita){
+    global $Cn;
+    $sql="INSERT INTO detallecita(idCita,Asociado,Fecha) values($cita,$asociado,( SELECT fecha FROM citas where id=$cita))";
+    return $Cn->execute($sql);
+    //ocupa($cita);
+}
+function ocupa($cita){
+    global $Cn;
+    $sql="UPDATE citas SET ocupados=ocupados+1 WHERE id=$cita";
+    return $Cn->execute($sql);
+}
 ?>

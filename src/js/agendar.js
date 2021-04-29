@@ -26,4 +26,22 @@ $(document).ready(function()
         }); // fin de ajax
     }
     })
+    $("#execute").click(function(){
+        var numeroaso=$("#search").val()
+        $("#SelectAso").val(numeroaso)
+    })
+    $("#cita").click(function(){
+     var capaso= $("#SelectAso").val()
+     $.ajax({
+        url:"controller/insertdetalle.php",
+        type:"POST",
+        data:"asociado="+capaso,
+        success:function(respuesta){
+           // console.log(respuesta)
+           //window.location.href ="agendar.php"
+           alert(respuesta)
+        } // fin del success
+        
+    }); // fin de ajax
+    })
 }); 

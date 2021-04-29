@@ -19,7 +19,7 @@
     $disponibles=$lugares-$ocupados;
     print "
     <div class='card col-3 mt-2' id='$id' data-date='$fecha'>
-  <div class='card-header'>
+  <div class='card-header' style='background-color: #0c0c0c75; color:white;'>
   folio:$id  Disponibles:$disponibles
   </div>
   <ul class='list-group list-group-flush'>

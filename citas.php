@@ -25,7 +25,7 @@
         <div class=" mt-4" id="generaltb"></div>
     </div>
     <script>
-    $("#generaltb").load("controller/generaltb.php");
+    $("#generaltb").load("controller/citastb.php");
     </script>
     <script src="src/js/jscitas.js"></script>
 </body>

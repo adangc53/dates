@@ -6,7 +6,8 @@
     include_once("$path");///dates/src/utilerias/database_utilerias.php"); 
      //$numero="";
     // print($path);
-    $res = diario();
+    $fecha =date("Y-m-d");
+    $res = diario($fecha);
     if($res == false)die("failed". $res->ErrorMsg().'<br>');
     print "<table id ='tablax'class='table table-striped table-bordered'>   <thead class='thead-dark'> <tr><th>id</th><th>Numero</th><th>nombre</th><th>Telefono</th><th>Area</th><th>Posicion</th><th>GL</th><th></th></tr>  </thead>";
     $mensaje="";

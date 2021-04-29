@@ -1,5 +1,5 @@
 # dates
-Login*
+Login*n
 Crea citas max 5 personas *
 Asigna personas a las citas*
 Ocupa lugares de la cita cupo maximo*

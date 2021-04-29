@@ -38,8 +38,8 @@ $(document).ready(function()
         data:"asociado="+capaso,
         success:function(respuesta){
            // console.log(respuesta)
-           //window.location.href ="agendar.php"
-           alert(respuesta)
+           window.location.href ="agendar.php"
+           //alert(respuesta)
         } // fin del success
         
     }); // fin de ajax

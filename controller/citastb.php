@@ -22,7 +22,7 @@
         
         
         print "<tr ><td class='text-center'>$id</td><td class='text-center'>$fecha</td><td class='text-center'>$lugares</td><td class='text-center'>$horario</td>
-        <td class='text-center'>$duracion</td><td class='text-center'>$ocupados</td><td class='text-center'><a href='#' data-num='$id'>Edit</a></td></tr>";
+        <td class='text-center'>$duracion</td><td class='text-center'>$ocupados</td><td class='text-center'><a id='idcita' href='#' data-num='$id'><i class='far fa-eye'></i></a></td></tr>";
          $style="";
          $res ->MoveNext();
     }

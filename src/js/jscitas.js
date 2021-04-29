@@ -21,4 +21,20 @@ $(document).ready(function()
       }); // fin de ajax 
     }
   })  
+  $("#generaltb").on("click","#idcita",function(){
+      var idcita= ($(this).attr("data-num"))
+      //alert(idcita)
+      $.ajax({
+        url:"controller/VarCita.php",
+        type:"POST",
+        data:0,
+        success:function(respuesta){
+            window.location.href ="detallecitas.php"
+            ///$("#generaltb").load("controller/generaltb.php");
+             
+         
+        } // fin del success
+        
+      }); // fin de ajax 
+  })
 }); 

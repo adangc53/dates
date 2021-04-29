@@ -49,9 +49,9 @@ function insertcita($fecha,$lugares,$horario,$duracion){
     $sql="INSERT INTO citas(fecha,lugares,horario,duracion,ocupados) VALUES('$fecha',$lugares,'$horario',$duracion,0)";
     return $Cn->execute($sql);
 }
-function diario(){
+function diario($fecha){
     global $Cn;
-    $sql="SELECT a.id,b.Numero,b.nombre,b.Telefono,b.Area,b.Posicion,b.gl FROM detallecita as a INNER JOIN data as b on(a.Asociado=b.Numero) INNER JOIN citas as c ON(a.IdCita=c.id) WHERE c.fecha='2021-04-29'";
+    $sql="SELECT a.id,b.Numero,b.nombre,b.Telefono,b.Area,b.Posicion,b.gl FROM detallecita as a INNER JOIN data as b on(a.Asociado=b.Numero) INNER JOIN citas as c ON(a.IdCita=c.id) WHERE c.fecha='$fecha'";
     return $Cn->execute($sql);
 }
 function AsociadosSinCitas(){
@@ -73,6 +73,11 @@ function InsertDetalle($asociado,$cita){
 function ocupa($cita){
     global $Cn;
     $sql="UPDATE citas SET ocupados=ocupados+1 WHERE id=$cita";
+    return $Cn->execute($sql);
+}
+function detallecitas($cita){
+    global $Cn;
+    $sql="SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=1";
     return $Cn->execute($sql);
 }
 ?>

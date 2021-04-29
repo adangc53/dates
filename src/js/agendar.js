@@ -1,7 +1,10 @@
 $(document).ready(function()
-{
+{ var estatus=0;
+    var asociado=0;
     $(".card").click(function(){
-        var asociado=$("#SelectAso").val()
+        if(estatus==1){document.getElementById(asociado).style.background = "white"; estatus=0;}
+        else{}
+        asociado=$("#SelectAso").val()
         if(asociado==""){
             alert("Seleccione una asociada para continuar")
         }
@@ -15,6 +18,9 @@ $(document).ready(function()
             success:function(respuesta){
                // console.log(respuesta)
                 alert("Cita seleccionada folio: "+respuesta+" dia de la cita: "+fecha)
+                document.getElementById(respuesta).style.background = "red";
+                estatus=1;
+                asociado=respuesta;
             } // fin del success
             
         }); // fin de ajax

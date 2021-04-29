@@ -10,6 +10,10 @@
     <?php include("Navbar.php") ?>
     <p class="h1 text-center">Agenda de citas</p>
     <div class="container">
+    <input type="text" class="col-3 form-control" id="search" placeholder="no. asociado">
+    <a href="#" class="btn btn-primary mt-2" id="execute">Buscar</a>
+    </div>
+        <div class="container">
     <label for="idaso">Asociado</label>
     <?php include_once("selects/SelectAsociado.php"); ?>
     <label for="">Fechas disponibles</label>

@@ -20,7 +20,7 @@
     print "
     <div class='card col-3 mt-2' id='$id' data-date='$fecha'>
   <div class='card-header'>
-   $disponibles
+  folio:$id  Disponibles:$disponibles
   </div>
   <ul class='list-group list-group-flush'>
     <li class='list-group-item'>$fecha</li>

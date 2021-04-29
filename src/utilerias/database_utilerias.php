@@ -54,4 +54,14 @@ function diario(){
     $sql="SELECT a.id,b.Numero,b.nombre,b.Telefono,b.Area,b.Posicion,b.gl FROM detallecita as a INNER JOIN data as b on(a.Asociado=b.Numero) INNER JOIN citas as c ON(a.IdCita=c.id) WHERE c.fecha='2021-04-29'";
     return $Cn->execute($sql);
 }
+function AsociadosSinCitas(){
+    global $Cn;
+    $sql ="SELECT Numero,badge,nombre,Posicion,Area FROM data WHERE Numero not in(SELECT Asociado FROM detallecita)";
+    return $Cn->execute($sql);
+}
+function CitasDisponibles(){
+    global $Cn;
+    $sql ="SELECT * FROM citas WHERE ocupados<lugares";
+    return $Cn->execute($sql);
+}
 ?>

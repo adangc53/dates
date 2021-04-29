@@ -8,7 +8,7 @@
     // print($path);
     $res = diario();
     if($res == false)die("failed". $res->ErrorMsg().'<br>');
-    print "<table id ='tablax'class='table table-striped table-bordered'>   <thead class='thead-dark'> <tr><th>id</th><th>Numero</th><th>nombre</th><th>Telefono</th><th>Area</th><th>Posicion</th><th>GL</th></tr>  </thead>";
+    print "<table id ='tablax'class='table table-striped table-bordered'>   <thead class='thead-dark'> <tr><th>id</th><th>Numero</th><th>nombre</th><th>Telefono</th><th>Area</th><th>Posicion</th><th>GL</th><th></th></tr>  </thead>";
     $mensaje="";
     $style="";
     $sem="";
@@ -23,7 +23,7 @@
         
         
         print "<tr ><td class='text-center'>$id</td><td class='text-center'>$numero</td><td class='text-center'>$nombre</td><td class='text-center'>$Telefono</td>
-        <td class='text-center'>$Area</td><td class='text-center'>$Posicion</td><td class='text-center'>$gl</td></tr>";
+        <td class='text-center'>$Area</td><td class='text-center'>$Posicion</td><td class='text-center'>$gl</td><td class='text-center'><a href='#'><i class='far fa-address-card h3'></i></a></td></tr>";
          $style="";
          $res ->MoveNext();
     }

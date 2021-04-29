@@ -9,5 +9,24 @@
 <body>
 <?php include("Navbar.php") ?>
 
+    <section class="container">
+    <p class="h4 text-center">Catalogo de citas</p>
+        <label for="fecha">Fecha de la cita</label>
+        <input type="date" id="fecha" class="form-control">
+        <label for="lugates">Lugares</label>
+        <input type="number" id="lugares" class="form-control">
+        <label for="horario">Horario</label>
+        <input type="text" class="form-control" id="horario" placeholder="Inserse el horario deseado para la cita">
+        <label for="duracion">Duracion</label>
+        <input type="number" class="form-control" id="duracion" placeholder="Duracion en Hrs">
+        <a href="#" id="savecita" class="btn btn-primary mt-2">Guardar</a>
+    </section>
+    <div class="container">
+        <div class=" mt-4" id="generaltb"></div>
+    </div>
+    <script>
+    $("#generaltb").load("controller/generaltb.php");
+    </script>
+    <script src="src/js/jscitas.js"></script>
 </body>
 </html>

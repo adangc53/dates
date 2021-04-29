@@ -30,7 +30,7 @@ function user($user){
 }
 function buscarAsociado($numero){
     global $Cn;
-    $sql="SELECT * FROM data where numero='$numero'";
+    $sql="SELECT * FROM data where numero like'$numero%'";
     return $Cn->execute($sql);
 }
 

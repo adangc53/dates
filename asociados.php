@@ -10,7 +10,7 @@
 <?php
     include("Navbar.php")
     ?>
-<<<<<<< HEAD
+
     <p class="h2 text-center">Catalogo de Asociados</p>
     <div class="container">
     <div class="mt-2" id="table"></div>
@@ -19,7 +19,6 @@
     <script>
     $("#table").load("controller/tableasociados.php");
     </script>
-=======
->>>>>>> 95872f8bd5fb9b709c5ae6a3a2215e83a97fcd30
+
 </body>
 </html>

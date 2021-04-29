@@ -3,7 +3,11 @@ define('DB_HOST', 'localhost');
 define('DB_DATABASE', 'mother');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
+<<<<<<< HEAD
 $path_util=$_SERVER['DOCUMENT_ROOT'].'/dates';
+=======
+$path_util=$_SERVER['DOCUMENT_ROOT'].'/toyota';
+>>>>>>> 95872f8bd5fb9b709c5ae6a3a2215e83a97fcd30
 include("$path_util./src/adodb5/adodb.inc.php");
 
 $Cn = NewADOConnection('mysqli');
@@ -30,9 +34,12 @@ function buscarAsociado($numero){
     $sql="SELECT * FROM data where numero='$numero'";
     return $Cn->execute($sql);
 }
+<<<<<<< HEAD
 function SelectAll(){
     global $Cn;
     $sql="SELECT * FROM data";
     return $Cn->execute($sql);
 }
+=======
+>>>>>>> 95872f8bd5fb9b709c5ae6a3a2215e83a97fcd30
 ?>

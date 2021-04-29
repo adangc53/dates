@@ -15,9 +15,15 @@
         <a href="#" class="btn btn-primary mt-2" id="busca">Buscar</a>
         <div class="mt-2" id="table"></div>
     </div>
+    <div class="container">
+        <p class="h3 mt-3">Consultas por atender</p>
+        <div class="" id="tbdiario"></div>
+    </div>
     <script>
    // $("#table").load("controller/busca.php");
+   $("#tbdiario").load("controller/tbdiario.php");
     </script>
+    
     <script src="src/js/busca.js"></script>
 </body>
 </html>

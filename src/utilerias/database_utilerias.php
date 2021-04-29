@@ -30,7 +30,7 @@ function user($user){
 }
 function buscarAsociado($numero){
     global $Cn;
-    $sql="SELECT * FROM data where numero like'$numero%'";
+    $sql="SELECT Numero,badge,nombre,genero,Telefono,Correo,gl,Posicion,Area FROM data where Numero like '$numero'";
     return $Cn->execute($sql);
 }
 
@@ -39,5 +39,19 @@ function SelectAll(){
     $sql="SELECT * FROM data";
     return $Cn->execute($sql);
 }
-
+function GeneralCitas(){
+    global $Cn;
+    $sql="SELECT * FROM citas";
+    return $Cn->execute($sql);
+}
+function insertcita($fecha,$lugares,$horario,$duracion){
+    global $Cn;
+    $sql="INSERT INTO citas(fecha,lugares,horario,duracion,ocupados) VALUES('$fecha',$lugares,'$horario',$duracion,0)";
+    return $Cn->execute($sql);
+}
+function diario(){
+    global $Cn;
+    $sql="SELECT a.id,b.Numero,b.nombre,b.Telefono,b.Area,b.Posicion,b.gl FROM detallecita as a INNER JOIN data as b on(a.Asociado=b.Numero) INNER JOIN citas as c ON(a.IdCita=c.id) WHERE c.fecha='2021-04-29'";
+    return $Cn->execute($sql);
+}
 ?>

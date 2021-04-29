@@ -8,14 +8,15 @@ $contra=$_POST["pass"]; $user=$_POST["user"];
 $res=user($user);
 $pass=$res->fields["password"];
 $name=$res->fields["nombre"];
+
 //$roll=$res->fields["roll"];
-if($contra==$pass){
+if($contra==$pass&&$contra!=null||$contra!=""){
     echo 200;
     $_SESSION["user"]=$name;
 }
 else{
     echo 404;
-    $_SESSION["usuario"]=0;
+    $_SESSION["user"]=0;
 }
 
 ?> 

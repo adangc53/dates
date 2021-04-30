@@ -77,7 +77,7 @@ function ocupa($cita){
 }
 function detallecitas($cita){
     global $Cn;
-    $sql="SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=1";
+    $sql="SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=$cita";
     return $Cn->execute($sql);
 }
 ?>

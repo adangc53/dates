@@ -1,5 +1,7 @@
 <?php 
 session_start();
-echo $_SESSION["cita"]=$_POST["cita"];
+$cita=$_POST["cita"];
+echo $_SESSION["cita"]=$cita;
+//echo $cita;
 
 ?>

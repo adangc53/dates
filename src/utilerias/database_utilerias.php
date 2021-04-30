@@ -80,4 +80,13 @@ function detallecitas($cita){
     $sql="SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=1";
     return $Cn->execute($sql);
 }
+function detestudios($numero){
+    global $Cn;
+    $sql="SELECT IdCita,Asociado,servicio AS Id_Servicio,s.nombre AS NombreServicio,
+          id_est,e.nombre AS NombreEstudio,Observaciones AS Status,Fecha from detallecita 
+          inner join estudios e
+          left join servicios s on (s.id_serv = e.servicio )
+          where Asociado = $numero";
+    return $Cn->execute($sql);
+}
 ?>

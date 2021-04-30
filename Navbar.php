@@ -47,6 +47,10 @@
       <li class="nav-item">
       <a class="nav-link" href="citas.php">Citas</a>
       </li>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="estudios.php">Estudios</a>
+      </li>
     </ul>
        <p class="mt-2 float-right mr-3 h5"> <?php print $_SESSION["user"]; ?></p>
      

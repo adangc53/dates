@@ -34,15 +34,21 @@
                     <label for="fecita">Fecha Cita</label>
                     <input type="text" class="form-control" id="fecita" placeholder="Numero de cita">
                 </div>
+                <div class="container">
+                    <input type="date" id="nvafecha" class="form-control" style="display:none;">
+                    <input type="number" id="noAsociadoDate" class="form-control" style="display:none;">
+                    <a href="#" id="changedate" class="btn btn-primary mt-2"  style="display:none;">Cambiar Fecha</a>
+                </div>
                 <div class="container mt-3">
                     <div class="" id="tablaservice1"></div>
                 </div>
-                <script>
-                    $("#tablaservice1").load("controller/tablaservice1.php");
-                </script>
 
-                <script src="src/js/buscaEstudios.js"></script>
             </form>
         </div>
     </body>
+    <script>
+        $("#tablaservice1").load("controller/tablaservice1.php");
+    </script>
+
+    <script src="src/js/buscaEstudios.js"></script>
 </html>

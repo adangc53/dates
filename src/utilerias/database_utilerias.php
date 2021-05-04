@@ -1,92 +1,186 @@
 <?php
+
 define('DB_HOST', 'localhost');
 define('DB_DATABASE', 'mother');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 
-$path_util=$_SERVER['DOCUMENT_ROOT'].'/dates';
+$path_util = $_SERVER['DOCUMENT_ROOT'] . '/dates';
 
 
 
 include("$path_util./src/adodb5/adodb.inc.php");
 $Cn = NewADOConnection('mysqli');
 $Cn->Connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
 //$Cn->SetFetchMode(ADODB_FETCH_ASSOC);
 
-function Ejecuta($sentencia)
-{
+function Ejecuta($sentencia) {
     global $Cn;
     if ($Cn->Execute($sentencia) == false)
-    return 'error al insertar'.$Cn->ErrorMsg().'<BR>';
-    else{ 
-        return "1"; 
-    }   
+        return 'error al insertar' . $Cn->ErrorMsg() . '<BR>';
+    else {
+        return "1";
+    }
 }
-/*************************************************************************************************************** */
-function user($user){
+
+function Ejecuta2($sentencia) {
     global $Cn;
-    $sql="SELECT password,nombre FROM users where user='$user'";
-    return $Cn->execute($sql);
+    try {
+        $result = $Cn->query($sentencia);
+        $result->closeCursor();
+        return 1; // Exito  
+    } catch (Exception $e) {
+        //die("Error en la linea: " + $e->getLine() + " MSG: " + $e->GetMessage());
+        return 0; // Fallo
+    }
 }
-function buscarAsociado($numero){
+
+/* * ************************************************************************************************************* */
+
+function user($user) {
     global $Cn;
-    $sql="SELECT Numero,badge,nombre,genero,Telefono,Correo,gl,Posicion,Area FROM data where Numero like '$numero'";
+    $sql = "SELECT password,nombre FROM users where user='$user'";
     return $Cn->execute($sql);
 }
 
-function SelectAll(){
+function buscarAsociado($numero) {
     global $Cn;
-    $sql="SELECT * FROM data";
+    $sql = "SELECT Numero,badge,nombre,genero,Telefono,Correo,gl,Posicion,Area FROM data where Numero like '$numero'";
     return $Cn->execute($sql);
 }
-function GeneralCitas(){
+
+function SelectAll() {
     global $Cn;
-    $sql="SELECT * FROM citas";
+    $sql = "SELECT * FROM data";
     return $Cn->execute($sql);
 }
-function insertcita($fecha,$lugares,$horario,$duracion){
+
+function GeneralCitas() {
     global $Cn;
-    $sql="INSERT INTO citas(fecha,lugares,horario,duracion,ocupados) VALUES('$fecha',$lugares,'$horario',$duracion,0)";
+    $sql = "SELECT * FROM citas";
     return $Cn->execute($sql);
 }
-function diario($fecha){
+
+function insertcita($fecha, $lugares, $horario, $duracion) {
     global $Cn;
-    $sql="SELECT a.id,b.Numero,b.nombre,b.Telefono,b.Area,b.Posicion,b.gl FROM detallecita as a INNER JOIN data as b on(a.Asociado=b.Numero) INNER JOIN citas as c ON(a.IdCita=c.id) WHERE c.fecha='$fecha'";
+    $sql = "INSERT INTO citas(fecha,lugares,horario,duracion,ocupados) VALUES('$fecha',$lugares,'$horario',$duracion,0)";
     return $Cn->execute($sql);
 }
-function AsociadosSinCitas(){
+
+function diario($fecha) {
     global $Cn;
-    $sql ="SELECT Numero,badge,nombre,Posicion,Area FROM data WHERE Numero not in(SELECT Asociado FROM detallecita)";
+    $sql = "SELECT a.id,b.Numero,b.nombre,b.Telefono,b.Area,b.Posicion,b.gl FROM detallecita as a INNER JOIN data as b on(a.Asociado=b.Numero) INNER JOIN citas as c ON(a.IdCita=c.id) WHERE c.fecha='$fecha'";
     return $Cn->execute($sql);
 }
-function CitasDisponibles(){
+
+function AsociadosSinCitas() {
     global $Cn;
-    $sql ="SELECT * FROM citas WHERE ocupados<lugares";
+    $sql = "SELECT Numero,badge,nombre,Posicion,Area FROM data WHERE Numero not in(SELECT Asociado FROM detallecita)";
     return $Cn->execute($sql);
 }
-function InsertDetalle($asociado,$cita){
+
+function CitasDisponibles() {
     global $Cn;
-    $sql="INSERT INTO detallecita(idCita,Asociado,Fecha) values($cita,$asociado,( SELECT fecha FROM citas where id=$cita))";
+    $sql = "SELECT * FROM citas ";
+    return $Cn->execute($sql);
+}
+
+function InsertDetalle($asociado, $cita) {
+    global $Cn;
+    $sql = "INSERT INTO detallecita(idCita,Asociado,Fecha) values($cita,$asociado,( SELECT fecha FROM citas where id=$cita))";
     return $Cn->execute($sql);
     //ocupa($cita);
 }
-function ocupa($cita){
+
+function ocupa($cita) {
     global $Cn;
-    $sql="UPDATE citas SET ocupados=ocupados+1 WHERE id=$cita";
+    $sql = "UPDATE citas SET ocupados=ocupados+1 WHERE id=$cita";
     return $Cn->execute($sql);
 }
-function detallecitas($cita){
+
+function detallecitas($cita) {
     global $Cn;
-    $sql="SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=1";
+    $sql = "SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=$cita";
     return $Cn->execute($sql);
 }
-function detestudios($numero){
+
+function detestudios($numero) {
     global $Cn;
-    $sql="SELECT IdCita,Asociado,servicio AS Id_Servicio,s.nombre AS NombreServicio,
-          id_est,e.nombre AS NombreEstudio,Observaciones AS Status,Fecha from detallecita 
-          inner join estudios e
-          left join servicios s on (s.id_serv = e.servicio )
-          where Asociado = $numero";
+    $sql = "SELECT IdCita,z.Asociado,servicio AS Id_Servicio,s.nombre AS NombreServicio, id_est,e.nombre AS NombreEstudio,Observaciones ,a.Fecha,z.estatus,z.id,z.fecha as fechareal 
+    from detallecita a INNER JOIN estudio_detalle as z on(a.Asociado=z.Asociado)inner join estudios as e ON(z.id_estudio=e.id_est) inner join servicios s on 
+    (s.id_serv = e.servicio ) 
+    where z.Asociado= $numero";
     return $Cn->execute($sql);
 }
+
+function selectasocita() {
+    global $Cn;
+    $sql = "SELECT Asociado,IdCita,Observaciones,Fecha FROM DETALLECITA;";
+    return $Cn->execute($sql);
+}
+
+function insertAsociado($asociado, $badge, $nombre, $genero, $telefono, $correo, $gl, $posicion, $area) {
+    global $Cn;
+    $sql = " INSERT INTO data (numero,badge,nombre,genero,telefono,correo,gl,posicion,area) "
+            . "values($asociado,'$badge','$nombre','$genero','$telefono','$correo','$gl','$posicion','$area');";
+    return $Cn->execute($sql);
+}
+
+function obtenerdatosasociado($id) {
+    global $Cn;
+    $sql = "SELECT*FROM data where numero = $id";
+    return $Cn->execute($sql);
+}
+
+function eliminarasociado($id) {
+    global $Cn;
+    $sql = "DELETE FROM data WHERE numero = $id";
+    return $Cn->execute($sql);
+}
+
+function eliminardetcita($id) {
+    global $Cn;
+    $sql = "DELETE FROM detallecita WHERE id = $id";
+    return $Cn->execute($sql);
+}
+
+function actualizarAsociado($post) {
+    $id = $post["pk"];
+    $clavem = $post["clavem"];
+    $nom = $post["nom"];
+    $clavea = $post["clavea"];
+
+    $edad = $post["edad"];
+    $sexo = $post["sexo"];
+    $correo = $post["correo"];
+    $estado = $post["estado"];
+    $sentencia = 'UPDATE "tablas".registroclasemaestro SET ' . "clavemateria='$clavea', numeromaestro=$clavem, 
+    nombremaestro='$nom',edadmaestro=$edad,sexomaestro='$sexo',correo='$correo',
+    estado=$estado WHERE idregmaestro=$id";
+    return Ejecuta2($sentencia);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function consultaEstudios(){
+    global $Cn;
+    $sql = "Select id_est from estudios";
+    return $Cn->execute($sql);
+}
+function consultaAsociados(){
+    global $Cn;
+    $sql = "select numero from data";
+    return $Cn->execute($sql);
+}
+function inserdetalleestudio($estudio,$asociado){
+    global $Cn;
+    $sql = "insert into estudio_detalle(id_estudio,estatus,asociado) values($estudio,0,$asociado)";
+    return $Cn->execute($sql);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function upedo($id){
+    global $Cn;
+    $sql = "update estudio_detalle set estatus=1 where id=$id";
+    return $Cn->execute($sql);
+}
+
 ?>

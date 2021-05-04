@@ -24,7 +24,7 @@
         
         
         print "<tr ><td class='text-center'>$id</td><td class='text-center'>$numero</td><td class='text-center'>$nombre</td><td class='text-center'>$Telefono</td>
-        <td class='text-center'>$Area</td><td class='text-center'>$Posicion</td><td class='text-center'>$gl</td><td class='text-center'><a href='#'><i class='far fa-address-card h3'></i></a></td></tr>";
+        <td class='text-center'>$Area</td><td class='text-center'>$Posicion</td><td class='text-center'>$gl</td><td class='text-center'><a href='#'data-numero='$numero' id='show'><i class='far fa-address-card h3'></i></a></td></tr>";
          $style="";
          $res ->MoveNext();
     }

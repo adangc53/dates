@@ -15,7 +15,7 @@
         $id=$res->fields["id"];
         $fecha=$res->fields["Fecha"];     
         $asociado=$res->fields["nombre"];  
-        print "<tr ><td class='text-center'>$id</td><td class='text-center'>$asociado</td><td class='text-center'>$fecha</td><td class='text-center'><a href='#'><i class='far fa-address-card h3'></i></a><a href='#'><i class='fas fa-trash h3'></i></a></td></tr>";
+        print "<tr ><td class='text-center'>$id</td><td class='text-center'>$asociado</td><td class='text-center'>$fecha</td><td class='text-center'><a href='#'><i class='far fa-address-card h3'></i></a><a href='#'><i id='eliminar'data-num='$id' class='fas fa-trash h3'></i></a></td></tr>";
          $style="";
          $res ->MoveNext();
     }

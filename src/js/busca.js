@@ -22,4 +22,17 @@ $(document).ready(function () {
         search()
       }
   });
+  $("#tbdiario").on("click","#show",function(){
+    var numero=( $(this).attr("data-numero"));
+    $.ajax({
+      url:"controller/VarNum.php",
+      type:"POST",
+      data:"numero="+numero,
+      success:function(respuesta){
+        window.location.href ="estudios.php"
+         
+      } // fin del success
+      
+  }); // fin de ajax 
+  })
     })

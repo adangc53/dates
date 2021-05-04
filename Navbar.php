@@ -45,7 +45,7 @@
       <a class="nav-link" href="asociados.php">Asociados</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="citas.php">Citas</a>
+      <a class="nav-link" href="citas.php">Tiempos</a>
       </li>
       </li>
       <li class="nav-item">

@@ -10,7 +10,7 @@
 <?php include("Navbar.php") ?>
 
     <section class="container">
-    <p class="h4 text-center">Catalogo de citas</p>
+    <p class="h4 text-center">Catalogo para asignar tiempos de consultas</p>
         <label for="fecha">Fecha de la cita</label>
         <input type="date" id="fecha" class="form-control">
         <label for="lugates">Lugares</label>

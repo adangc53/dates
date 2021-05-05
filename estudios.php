@@ -30,6 +30,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="container">
+                    <input type="text" id="nameAso" class="form-control">
+                </div>
+                <div class="container" id="divhide" style="display:none;">
+                    <label for="Comment">Comentario</label>
+                    <input type="text" id="comment" class="form-control">
+                    <input type="text" id="noestudiosdata" style="display:none;">
+                    <a href="#" id="captcomment" class="btn btn-primary mt-2">Comentar</a>
+                </div>
                 <div class="form-group">
                     <label for="fecita">Fecha Cita</label>
                     <input type="text" class="form-control" id="fecita" placeholder="Numero de cita">

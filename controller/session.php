@@ -10,7 +10,7 @@ $pass=$res->fields["password"];
 $name=$res->fields["nombre"];
 
 //$roll=$res->fields["roll"];
-if($contra==$pass&&$contra!=null||$contra!=""){
+if(($contra==$pass)){
     echo 200;
     $_SESSION["user"]=$name;
 }

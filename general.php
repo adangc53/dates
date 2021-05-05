@@ -8,7 +8,7 @@
     </head>
     <body>
         <?php include_once("Navbar.php") ?>
-        <div class="container mt-3">
+        <div class="container mt-3 text-center">
             <h4>ASOCIADOS CON CITA ASIGNADA</h4>
             <div class="" id="asociadoscita"></div>
         </div>

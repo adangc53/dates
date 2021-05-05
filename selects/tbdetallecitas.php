@@ -6,7 +6,7 @@
     $cita=$_SESSION["cita"];
     $res = detallecitas($cita);
     if($res == false)die("failed". $res->ErrorMsg().'<br>');
-    print "<table id ='tablax'class='table table-striped table-bordered'><thead class='thead-dark'><tr><th>id</th><th>Nombre</th><th>Fecha</th><th></th></tr></thead>";
+    print "<table id ='tablax'class='table table-striped table-bordered'><thead class='thead-dark'><tr><th>id</th><th>Asociado</th><th>Nombre</th><th>Fecha</th><th></th></tr></thead>";
     $mensaje="";
     $style="";
     $sem="";
@@ -15,7 +15,10 @@
         $id=$res->fields["id"];
         $fecha=$res->fields["Fecha"];     
         $asociado=$res->fields["nombre"];  
-        print "<tr ><td class='text-center'>$id</td><td class='text-center'>$asociado</td><td class='text-center'>$fecha</td><td class='text-center'><a href='#'><i class='far fa-address-card h3'></i></a><a href='#'><i id='eliminar'data-num='$id' class='fas fa-trash h3'></i></a></td></tr>";
+        $numero=$res->fields["Numero"];
+        $idcita=$res->fields["IdCita"];
+        print "<tr ><td class='text-center'>$id</td><td class='text-center'>$numero</td><td class='text-center'>$asociado</td><td class='text-center'>$fecha</td>
+        <td class='text-center'><a href='#' id='userdata' data-aso='$numero'><i class='far fa-address-card h3'></i>    </a><a href='#'><i id='eliminar'data-num='$id' data-cita='$idcita' class='fas fa-trash h3'></i></a></td></tr>";
          $style="";
          $res ->MoveNext();
     }

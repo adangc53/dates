@@ -6,7 +6,7 @@
     //$cita=$_SESSION["cita"];
     $res = detestudios($numero);
     if($res == false)die("failed". $res->ErrorMsg().'<br>');
-    print "<table id ='tablax'class='table table-striped table-bordered'><thead class='thead-dark'><tr><th>Id Cita</th><th>Asociado</th><th>Nombre Servicio</th><th>Nombre Estudio</th><th>estado</th><th>Fecha</th><th>Nva.Fecha</th><th></th></tr></thead>";
+    print "<table id ='tablax'class='table table-striped table-bordered'><thead class='thead-dark'><tr><th>Id Cita</th><th>Asociado</th><th>Nombre Servicio</th><th>Nombre Estudio</th><th>estado</th><th>Fecha</th><th>Nva.Fecha</th><th>observaciones</th><th></th></tr></thead>";
     
     $style="";
     $sem="";
@@ -15,6 +15,8 @@
         $mensaje="";
         $icon="";
         $dateops="";
+        $commentops="";
+        $observa=$res->fields["observaciones"];
         $idest=$res->fields["id"];
         $fechaest=$res->fields["fechareal"]; 
         $idCita=$res->fields["IdCita"];
@@ -24,13 +26,14 @@
         $NombreServicio=$res->fields["NombreServicio"];
         $id_est=$res->fields["id_est"];
         $NombreEstudio=$res->fields["NombreEstudio"];
-        $Status=$res->fields["Observaciones"];
+        //$Status=$res->fields["Observaciones"];
         $fecha=$res->fields["Fecha"];
         if($estado==0){$mensaje="Pendiente"; $icon="<a href='#' Id='ops' data-estudio='$idest'><i class='fas fa-syringe h6'></i></a>";
             $dateops="<a href='#' Id='ops-date' data-estudio='$idest'><i class='far fa-calendar-times h6'></i></a>";
+            $commentops="<a href='#' Id='ops-comment' data-estudio='$idest'><i class='far fa-comment-alt h6'></i></a>";
         }  
         else{$mensaje="Realizado";}   
-        print "<tr ><td class='text-center'>$idCita</td><td class='text-center'>$Asociado</td><td class='text-center'>$NombreServicio</td><td class='text-center'>$NombreEstudio</td><td class='text-center'>$mensaje</td><td class='text-center'>$fecha</td><td class='text-center'>$fechaest</td><td class='text-center'>$icon $dateops</td></tr>";
+        print "<tr ><td class='text-center'>$idCita</td><td class='text-center'>$Asociado</td><td class='text-center'>$NombreServicio</td><td class='text-center'>$NombreEstudio</td><td class='text-center'>$mensaje</td><td class='text-center'>$fecha</td><td class='text-center'>$fechaest</td><td class='text-center'>$observa</td><td class='text-center'>$icon $dateops $commentops</td></tr>";
          $style="";
          $res ->MoveNext();
     }

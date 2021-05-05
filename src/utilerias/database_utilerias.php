@@ -101,13 +101,13 @@ function ocupa($cita) {
 
 function detallecitas($cita) {
     global $Cn;
-    $sql = "SELECT a.id,a.Fecha,b.nombre FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=$cita";
+    $sql = "SELECT a.id,a.Fecha,b.nombre,b.Numero,a.IdCita FROM detallecita as a inner join data as b on(a.Asociado=b.Numero)  where a.IdCita=$cita";
     return $Cn->execute($sql);
 }
 
 function detestudios($numero) {
     global $Cn;
-    $sql = "SELECT IdCita,z.Asociado,servicio AS Id_Servicio,s.nombre AS NombreServicio, id_est,e.nombre AS NombreEstudio,Observaciones ,a.Fecha,z.estatus,z.id,z.fecha as fechareal 
+    $sql = "SELECT IdCita,z.Asociado,servicio AS Id_Servicio,s.nombre AS NombreServicio, id_est,e.nombre AS NombreEstudio,a.Fecha,z.estatus,z.id,z.fecha as fechareal ,z.observaciones
     from detallecita a INNER JOIN estudio_detalle as z on(a.Asociado=z.Asociado)inner join estudios as e ON(z.id_estudio=e.id_est) inner join servicios s on 
     (s.id_serv = e.servicio ) 
     where z.Asociado= $numero";
@@ -116,7 +116,7 @@ function detestudios($numero) {
 
 function selectasocita() {
     global $Cn;
-    $sql = "SELECT Asociado,IdCita,Observaciones,Fecha FROM DETALLECITA;";
+    $sql = "SELECT b.Asociado,b.IdCita,b.Observaciones,b.Fecha,a.nombre FROM DETALLECITA as b inner join data as a on(a.Numero=b.Asociado) ;";
     return $Cn->execute($sql);
 }
 
@@ -145,42 +145,65 @@ function eliminardetcita($id) {
     return $Cn->execute($sql);
 }
 
-function actualizarAsociado($post) {
-    $id = $post["pk"];
-    $clavem = $post["clavem"];
-    $nom = $post["nom"];
-    $clavea = $post["clavea"];
-
-    $edad = $post["edad"];
-    $sexo = $post["sexo"];
-    $correo = $post["correo"];
-    $estado = $post["estado"];
-    $sentencia = 'UPDATE "tablas".registroclasemaestro SET ' . "clavemateria='$clavea', numeromaestro=$clavem, 
-    nombremaestro='$nom',edadmaestro=$edad,sexomaestro='$sexo',correo='$correo',
-    estado=$estado WHERE idregmaestro=$id";
-    return Ejecuta2($sentencia);
+function actualizarAsociado($asociado, $badge, $nombre, $genero, $telefono, $correo, $gl, $posicion, $area,$id) {
+    global $Cn;
+    $sql = " UPDATE data SET numero = $asociado, badge = '$badge', nombre = '$nombre', genero = '$genero', "
+            . "telefono = '$telefono', correo = '$correo',gl ='$gl',posicion ='$posicion',area='$area' WHERE numero = $id";
+    print_r($sql);
+    die();
+    return $Cn->execute($sql);
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function consultaEstudios(){
+function consultaEstudios() {
     global $Cn;
     $sql = "Select id_est from estudios";
     return $Cn->execute($sql);
 }
-function consultaAsociados(){
+
+function consultaAsociados() {
     global $Cn;
     $sql = "select numero from data";
     return $Cn->execute($sql);
 }
-function inserdetalleestudio($estudio,$asociado){
+
+function inserdetalleestudio($estudio, $asociado) {
     global $Cn;
     $sql = "insert into estudio_detalle(id_estudio,estatus,asociado) values($estudio,0,$asociado)";
     return $Cn->execute($sql);
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function upedo($id){
+function upedo($id) {
     global $Cn;
     $sql = "update estudio_detalle set estatus=1 where id=$id";
     return $Cn->execute($sql);
 }
+function ActualizaFechaEstudio($estudio,$fecha){
+    global $Cn;
+    $sql="UPDATE estudio_detalle set fecha='$fecha' where id=$estudio";
+    return $Cn->execute($sql);
 
+}
+function BuscaAsociadoData($numero){
+    global $Cn;
+    $sql="select a.IdCita,b.Numero,b.nombre from detallecita as a inner join data as b on(a.Asociado=b.Numero) where b.Numero=$numero";
+    return $Cn->execute($sql);
+}
+function deletedate($numero){
+    global $Cn;
+    $sql="delete from detallecita where id=$numero";
+    return $Cn->execute($sql);
+}
+function addvacante($cita){
+    global $Cn;
+    $sql="UPDATE citas set ocupados=ocupados-1 where id=$cita";
+    return $Cn->execute($sql);
+}
+function ActualizaComentario($comentario,$id){
+    global $Cn;
+    $sql="Update estudio_detalle set observaciones='$comentario' where id=$id";
+    return $Cn->execute($sql);
+}
 ?>
+

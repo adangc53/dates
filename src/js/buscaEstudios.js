@@ -51,14 +51,61 @@ $(document).ready(function () {
       $.ajax({
         url:"controller/updateedoDate.php",
         type:"POST",
-        data:"id="+idestudio,
+        data:"fecha="+fecha+"&estudio="+noAso,
         success:function(respuesta){
-         alert(respuesta)
+         //alert(respuesta)
             $("#tablaservice1").load("controller/tablaservice1.php");
+            document.getElementById("nvafecha").style.display = "none";
+            document.getElementById("changedate").style.display = "none";
+            $("#noAsociadoDate").val("")
+            $("#nvafecha").val("")
+            
         } // fin del success
         
     }); // fin de ajax 
     }
   })
-  
+  dataAsociado()
+  function dataAsociado(){
+    var variable={}
+    $.ajax({
+      url:"controller/searchAsociadoData.php",
+      type:"POST",
+      data:0,
+      success:function(respuesta){
+       variable=JSON.parse(respuesta)
+       $("#nocita").val(variable.idcita)
+       $("#nosociado").val(variable.numero)
+       $("#nameAso").val(variable.nombre)
+       $( "#nocita" ).prop( "disabled", true );
+       $( "#nosociado" ).prop( "disabled", true );
+       $( "#nameAso" ).prop( "disabled", true );
+        console.log(variable)
+      } // fin del success
+      
+  }); // fin de ajax 
+  }
+  $("#tablaservice1").on("click","#ops-comment",function(){
+    var idestudio=($(this).attr("data-estudio"))
+    document.getElementById("divhide").style.display = "block";
+    $("#noestudiosdata").val(idestudio)
+  })
+  $("#captcomment").click(function(){
+    var comment=$("#comment").val()
+    var id=$("#noestudiosdata").val()
+    $.ajax({
+      url:"controller/upodatecomment.php",
+      type:"POST",
+      data:"comment="+comment+"&id="+id,
+      success:function(respuesta){
+       //alert(respuesta)
+          $("#tablaservice1").load("controller/tablaservice1.php");
+          document.getElementById("divhide").style.display = "none";
+          $("#comment").val("")
+          $("#noestudiosdata").val("")
+          
+      } // fin del success
+      
+  }); // fin de ajax 
+  })
     })

@@ -16,14 +16,12 @@ require "PHPMailer/SMTP.php";
 correspondencia();
 //function correspondencia($correo,$nombre,$folio,$numero){
     function correspondencia(){
-        $correo="adangc53@gmail.com";
-        $correoGl="16980824@itroque.edu.mx";
+        $correo="carolina.esparza@toyota.com";
+        //$correoGl="16980824@itroque.edu.mx";
 $mail = new PHPMailer(true);
 
-    $mensaje=" TMMGT Programa toyota Moms, Estudios clinicos para todas nuestras madres, como parte del programa toyota moms se le ha asignado una cita medica el dia CITA_DATE donde
-    donde podra tener acceso a una serie de estudios generales y de especialidad. Los estudios estan pensados para que todas nuestras mujeres puedan estar al tanto de su estado de salud
-     ";
-        $nombre="NOM_ASOCIADO su solicitud fue aprobada";
+    $mensaje=" ";
+        $nombre="NOM_ASOCIADO";
 
 try {
     //Server settings
@@ -39,13 +37,17 @@ try {
     //Recipients
     $mail->setFrom('ToyotaMoms2021@gmail.com', 'TMMGT TOYOTA MomS');//correo de envio 
     $mail->addAddress("$correo","$nombre");     //Destino
-    $mail->addAddress("$correo","$nombre");     //Destino
-    $mail->addAddress("$correoGl","GL");  
+    //$mail->addAddress("$correo","$nombre");     //Destino
+    //$mail->addAddress("$correoGl","GL");  
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = "Solicitud de reposicion folio:";//titulo 
-    $mail->Body    = "$nombre su solicitud fue aprovada <br> <b>folio: $mensaje</b>";//contenido
+    $mail->Subject = "Programa de Revision Medica Mama Toyota";//titulo 
+    $mail->Body    ="<p class='text-center' style='font-size:20px; text-align: center;'>Bienvenida al Programa de Revisión Médica para Mamá Toyota</p>".
+    "<p class='text-center' style='text-align: center;'>Tienes programada una cita médica diseñada especialmente para ti el día</p>".
+    "<p class='text-center' style='color:#ec039af2;text-align: center;'>Martes 11 de Mayo del 2021</p>".
+    "<p style='text-align: center;'>Por favor lee y toma en cuenta la siguiente información importante antes de acudir a tu cita</p>".
+    '<img src="https://lh5.googleusercontent.com/I-I8qvxbGsJb093jf6Q0W55suoN51N0_hfzkspRT0jGkS2B3L08xyVOHnxMXk3pBsJKlPeRzPgow7vFHFGAY2n1nmkEUN5dvrwgSu1TV6L6P89WVRe72baZE8e7gmVkYrA=w1280" style="display:block;margin:auto;">';//"$mensaje";//contenido
     
 
     $mail->send();

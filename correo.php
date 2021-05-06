@@ -16,7 +16,7 @@ require "PHPMailer/SMTP.php";
 correspondencia();
 //function correspondencia($correo,$nombre,$folio,$numero){
     function correspondencia(){
-        $correo="carolina.esparza@toyota.com";
+        $correo="sistemas@altertex.com.mx";
         //$correoGl="16980824@itroque.edu.mx";
 $mail = new PHPMailer(true);
 

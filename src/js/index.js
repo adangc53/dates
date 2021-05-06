@@ -14,7 +14,7 @@ $(document).ready(function() {
         success:function(respuesta){
          //alert(respuesta)
           if(respuesta==200){ window.location.href ="home.php" }
-          if(respuesta==404){ alert("usuario o contraseña enconrecta")}
+          if(respuesta==404){ alert("usuario o contraseña inconrecta")}
         } // fin del success
         
       }); // fin de ajax 
